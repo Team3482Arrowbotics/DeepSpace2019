@@ -5,6 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+// ruchir no bully pls eeeee
+
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -40,7 +42,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-    // RobotMap.frontRight.setInverted(true);
+    // RobotMap.frontRight.setInverted(true); 
     // RobotMap.backRight.setInverted(true); wow
   }
 
