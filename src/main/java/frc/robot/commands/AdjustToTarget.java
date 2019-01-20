@@ -8,21 +8,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Locale;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Vision;
 
 public class AdjustToTarget extends Command {
-  Vision v;
-  double angle;
-  double counter = 0;
-  final double MAX_DEVIATION = 10;
-  public AdjustToTarget() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    v = new Vision();
-    angle = v.getVisionAngle();
-
-  }
+  
+  
+  private final Vision v = new Vision();
+  private final double MAX_DEVIATION = 10;
+  
+  private double angle = v.getVisionAngle();
+  private double counter = 0;
+  
+  // public AdjustToTarget() {
+  //   v = new Vision();
+  //   angle = v.getVisionAngle();
+  // }
 
   // Called just before this Command runs the first time
   @Override
@@ -35,14 +37,15 @@ public class AdjustToTarget extends Command {
   @Override
   protected void execute() {
     angle = v.getVisionAngle();
-    // accounts for actual perspective vs perceived perspective
+    
     if(RobotMap.rotator.getError() > 2){
       counter++;
-      if(counter > 1000){
+
+      if(counter > Locale.VISION_MAX_COUNTER){  
         if(angle > MAX_DEVIATION){
-          // sets setpoint to new angle
           RobotMap.rotator.setSetpoint(angle);
         }
+      
       }
     }
   }
