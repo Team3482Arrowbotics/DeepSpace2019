@@ -8,9 +8,13 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.subsystems.RotateOut;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -26,15 +30,28 @@ public class RobotMap {
   public static SpeedControllerGroup left;
   public static SpeedControllerGroup right;
   public static DifferentialDrive drive;
+  public static AHRS navx;
+  public static PIDController rotator;
+  public static RotateOut rotOut;
 
   public static void init(){
     frontLeft = new WPI_TalonSRX(0);
     backLeft = new WPI_TalonSRX(9);
     frontRight = new WPI_TalonSRX(07);
     backRight = new WPI_TalonSRX(11);
+
     left = new SpeedControllerGroup(frontLeft, backLeft);
     right = new SpeedControllerGroup(frontRight, backRight);
+
     drive = new DifferentialDrive(left, right);
+
+    navx = new AHRS(Port.kMXP);
+
+    rotator = new PIDController(2, 0, 0, navx, rotOut); // dampening required?
+    rotator.setAbsoluteTolerance(2);
+    rotator.setContinuous(true);
+    rotator.setInputRange(-180, 180);
+    rotator.setOutputRange(-.6, .6);
   }
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
@@ -45,4 +62,5 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
+  // ruchir is poopoo
 }

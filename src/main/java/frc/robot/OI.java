@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.AdjustToTarget;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,8 +17,12 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
   Joystick x;
+  JoystickButton a;
   public OI(){
     x = new Joystick(0);
+    a = new JoystickButton(x, 2);
+    a.whileHeld(new AdjustToTarget());
+
   }
 
   //// CREATING BUTTONS
