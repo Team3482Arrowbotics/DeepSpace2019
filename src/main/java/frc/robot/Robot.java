@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     // RobotMap.frontRight.setInverted(true);
-    // RobotMap.backRight.setInverted(true);
+    // RobotMap.backRight.setInverted(true); wow
   }
 
   /**
